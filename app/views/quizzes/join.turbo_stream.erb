@@ -3,8 +3,8 @@
 <% end %>
 
 
-<%= turbo_stream.append "participations_list" do %>
-  <%= render partial: "participation", locals: { participation: @participation } %>
-<% end %>
+<%#= turbo_stream.append "participations_list" do %>
+  <%#= render partial: "participation", locals: { participation: @participation } %>
+<%# end %>
 
-<%= turbo_stream.update "participants_count", @participation_count %>
+<%#= turbo_stream.update "participants_count", @participation_count %>

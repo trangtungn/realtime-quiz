@@ -19,8 +19,10 @@
 <% end %>
 
 <%= turbo_frame_tag "participations" do %>
-  <h3>Participants (<span id="participants_count"><%= @participations.count %></span>)</h3>
-  <div id="participations_list">
-    <%= render partial: "participation", collection: @participations %>
+  <div id="quiz" data-quiz-id="<%= @quiz.id %>">
+    <h3>Participants (<span id="participants_count"><%= @participations.count %></span>)</h3>
+    <div id="participations_list">
+      <%= render partial: "participations/participation", collection: @participations %>
+    </div>
   </div>
 <% end %>

@@ -33,6 +33,8 @@ class QuizzesController < ApplicationController
     @participation = @quiz.participations.create(user: current_user)
     @participation_count = @quiz.participations.size
 
+    QuizChannel.broadcast_to(@quiz, { action: 'add_participant', participant: current_user.name, participation: @participation, participation_count: @participation_count })
+
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @quiz, notice: "You have joined the quiz." }
