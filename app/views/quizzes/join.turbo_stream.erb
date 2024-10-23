@@ -1,0 +1,10 @@
+<%= turbo_stream.replace "join_quiz" do %>
+  <p>You have joined the quiz!</p>
+<% end %>
+
+
+<%= turbo_stream.append "participations_list" do %>
+  <%= render partial: "participation", locals: { participation: @participation } %>
+<% end %>
+
+<%= turbo_stream.update "participants_count", @participation_count %>

@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+
+<div>
+  <%= link_to "Back to quizzes", quizzes_path %>
+</div>
+
+<div>
+  <strong>Player:</strong> <%= current_user.name %>
+</div>
+
+<%= render @quiz %>
+
+
+<%= turbo_frame_tag "join_quiz" do %>
+  <% unless @joined %>
+    <%= button_to "Join Quiz", join_quiz_path(@quiz), method: :post, class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<%= turbo_frame_tag "participations" do %>
+  <h3>Participants (<span id="participants_count"><%= @participations.count %></span>)</h3>
+  <div id="participations_list">
+    <%= render partial: "participation", collection: @participations %>
+  </div>
+<% end %>

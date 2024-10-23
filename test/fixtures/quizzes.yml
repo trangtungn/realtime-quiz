@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Vocabulary Quiz 1
+  description: <%= Faker::Lorem.sentence %>
+  token: <%= Faker::Internet.uuid %>
+  expired_at: <%= Faker::Time.between(from: DateTime.now, to: DateTime.now + 1.week) %>
+
+two:
+  title: Vocabulary Quiz 2
+  description: <%= Faker::Lorem.sentence %>
+  token: <%= Faker::Internet.uuid %>
+  expired_at: <%= Faker::Time.between(from: DateTime.now, to: DateTime.now + 1.week) %>
