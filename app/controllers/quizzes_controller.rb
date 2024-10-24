@@ -1,6 +1,7 @@
 class QuizzesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: :index
   before_action :prepare_quiz, only: [:show, :join]
+  before_action :validate_quiz, only: :join
 
   def index
     @quizzes = Quiz.all
@@ -11,25 +12,8 @@ class QuizzesController < ApplicationController
     @joined = @quiz.participations.exists?(user: current_user)
   end
 
-  def new
-    @quiz = Quiz.new
-  end
-
-  def create
-    @quiz = Quiz.new(quiz_params)
-
-    respond_to do |format|
-      if @quiz.save
-        format.html { redirect_to @quiz, notice: "Quiz was successfully created." }
-        format.json { render :show, status: :created, location: @quiz }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @quiz.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def join
+    @quiz = Quiz.find_by!(unique_id: params[:unique_id])
     @participation = @quiz.participations.create(user: current_user)
     @participation_count = @quiz.participations.size
 
@@ -44,12 +28,10 @@ class QuizzesController < ApplicationController
   private
 
   def prepare_quiz
-    @quiz = Quiz.find(params[:id])
-
-    check_expiration
+    @quiz = Quiz.find_by!(token: params[:token])
   end
 
-  def check_expiration
+  def validate_quiz
     return unless @quiz.token_expired?
 
     flash[:alert] = "This quiz has ended."

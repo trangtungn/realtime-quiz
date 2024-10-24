@@ -10,10 +10,9 @@ Rails.application.routes.draw do
 
   get "login", to: "sessions#new"
   post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 
-  resources :quizzes, only: [:new, :create, :index, :show] do
+  resources :quizzes, only: [:new, :create, :index, :show], param: :token do
     post :join, on: :member
   end
-
-  resources :participations, only: [:index, :show]
 end
