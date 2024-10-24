@@ -3,4 +3,9 @@
 
 import { createConsumer } from "@rails/actioncable"
 
-export default createConsumer()
+// TO RUN CABLE ASYNC ALONG WITH RAILS SERVER, ENABLE THE FOLLOWING LINE
+// export default createConsumer()
+
+// TO RUN CABLE AS A STANDALONE SERVER, ENABLE THE FOLLOWING LINE
+// Note: You need to run rails server first and then run rails actioncable:serve
+export default createConsumer('ws://localhost:28080/cable')
