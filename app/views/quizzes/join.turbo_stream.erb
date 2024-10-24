@@ -1,7 +1,11 @@
 <%= turbo_stream.replace "join_quiz" do %>
-  <p>You have joined the quiz!</p>
+  <% if notice.present? %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+  <% end %>
+  <% if alert.present? %>
+    <div class="alert alert-danger" role="alert"><%= alert %></div>
+  <% end %>
 <% end %>
-
 
 <%#= turbo_stream.append "participations_list" do %>
   <%#= render partial: "participation", locals: { participation: @participation } %>
