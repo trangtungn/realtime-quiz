@@ -1,14 +1,13 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-4">
+  <%= render "shared/alerts" %>
 
-<h1>Quizzes</h1>
+  <h1 class="mb-4">Quizzes</h1>
 
-<div id="quizzes">
-  <% @quizzes.each do |quiz| %>
-    <%= render quiz %>
-    <p>
-      <%= link_to "Show this quiz", quiz %>
-    </p>
-  <% end %>
+  <div id="quizzes" class="row">
+    <% @quizzes.each do |quiz| %>
+      <div class="col-md-4 mb-3">
+        <%= render quiz %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New quiz", new_quiz_path %>

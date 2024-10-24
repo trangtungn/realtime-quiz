@@ -1,12 +1,7 @@
-<div id="<%= dom_id quiz %>">
-  <p>
-    <strong>Title:</strong>
-    <%= quiz.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= quiz.description %>
-  </p>
-
+<div id="<%= dom_id quiz %>" class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= quiz.title %></h5>
+    <p class="card-text"><%= quiz.description %></p>
+    <%= link_to "Show this quiz", quiz_path(quiz.token), class: "btn btn-primary" %>
+  </div>
 </div>

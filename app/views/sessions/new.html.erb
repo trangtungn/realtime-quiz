@@ -1,21 +1,24 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <%= form_for(User.new, url: login_path) do |f| %>
+            <div class="mb-3">
+              <%= f.label :username, class: "form-label" %>
+              <div class="input-group">
+                <span class="input-group-text">@</span>
+                <%= f.text_field :username, class: "form-control", placeholder: "Enter your username" %>
+              </div>
+            </div>
 
-    <h2 id="log-in-title">Log in</h2>
-    <div class="auth-form well">
-    <%= form_for(User.new, url: login_path) do |f| %>
-
-      <%=f.label :username%>
-      <div class="input-group">
-        <span class="input-group-addon">@</span>
-          <%= f.text_field :username, class: "form-control"%>
+            <div class="d-grid">
+              <%= f.submit "Log in", class: "btn btn-primary btn-lg" %>
+            </div>
+          <% end %>
+        </div>
       </div>
-
-      <div class="actions">
-        <%= f.submit "log in", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+      <%= render partial: 'layouts/flash_errors' %>
     </div>
-    <%= render partial: 'layouts/flash_errors'%>
   </div>
 </div>

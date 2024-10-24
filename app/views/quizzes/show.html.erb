@@ -1,28 +1,31 @@
-<p style="color: green"><%= notice %></p>
-<p style="color: red"><%= alert %></p>
+<div class="container mt-4">
+  <%= render "shared/alerts" %>
+  <div class="mb-3">
+    <%= link_to "Back to quizzes", quizzes_path, class: "btn btn-secondary" %>
+  </div>
 
-<div>
-  <%= link_to "Back to quizzes", quizzes_path %>
-</div>
-
-<div>
-  <strong>Player:</strong> <%= current_user.name %>
-</div>
-
-<%= render @quiz %>
-
-
-<%= turbo_frame_tag "join_quiz" do %>
-  <% unless @joined %>
-    <%= button_to "Join Quiz", join_quiz_path(@quiz), method: :post, class: "btn btn-primary" %>
-  <% end %>
-<% end %>
-
-<%= turbo_frame_tag "participations" do %>
-  <div id="quiz" data-quiz-id="<%= @quiz.id %>">
-    <h3>Participants (<span id="participants_count"><%= @participations.count %></span>)</h3>
-    <div id="participations_list">
-      <%= render partial: "participations/participation", collection: @participations %>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="card-title"><%= @quiz.title %></h2>
+      <p class="card-text"><%= @quiz.description %></p>
+      <p class="card-text"><strong>Player:</strong> <%= current_user.name %></p>
     </div>
   </div>
-<% end %>
+
+  <%= turbo_frame_tag "join_quiz" do %>
+    <% unless @joined %>
+      <%= button_to "Join Quiz", join_quiz_path(@quiz.token), method: :post, class: "btn btn-primary mb-4" %>
+    <% end %>
+  <% end %>
+
+  <%= turbo_frame_tag "participations" do %>
+    <div id="quiz" data-quiz-id="<%= @quiz.id %>" class="card">
+      <div class="card-body">
+        <h3 class="card-title">Participants (<span id="participants_count"><%= @participations.count %></span>)</h3>
+        <div id="participations_list" class="list-group">
+          <%= render partial: "participations/participation", collection: @participations %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
