@@ -12,26 +12,14 @@ class QuizzesController < ApplicationController
   end
 
   def join
-    @participation = @quiz.participations.new(user: current_user)
+    result = JoinQuizService.new(@quiz, current_user).call
 
-    if @participation.save
-      @participation_count = @quiz.participations.size
-      QuizChannel.broadcast_to(@quiz, {
-        action: 'add_participant',
-        participant: current_user.name,
-        participation: @participation,
-        participation_count: @participation_count
-      })
-
-      message = "You have joined the quiz."
-      respond_to do |format|
-        format.turbo_stream { render :join, locals: { notice: message } }
-        format.html { redirect_to @quiz, notice: message }
-      end
-    else
-      message = @participation.errors.full_messages.to_sentence
-      respond_to do |format|
-        format.turbo_stream { render :join, locals: { alert: message } }
+    respond_to do |format|
+      if result[:success]
+        format.turbo_stream { render :join, locals: { status: :success, message: result[:message] } }
+        format.html { redirect_to @quiz, success: result[:message] }
+      else
+        format.turbo_stream { render :join, locals: { status: :error, message: result[:message] } }
         format.html { render :show, status: :unprocessable_entity }
       end
     end
@@ -48,7 +36,7 @@ class QuizzesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to quizzes_path, alert: "This quiz has ended." }
-      format.turbo_stream { head :unprocessable_entity }
+      format.turbo_stream { render :join, locals: { status: :error, message: "This quiz has ended." } }
     end
   end
 

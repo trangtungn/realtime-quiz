@@ -1,9 +1,8 @@
 <%= turbo_stream.replace "join_quiz" do %>
-  <% if notice.present? %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-  <% end %>
-  <% if alert.present? %>
-    <div class="alert alert-danger" role="alert"><%= alert %></div>
+  <% if status == :success %>
+    <div class="alert alert-success" role="alert"><%= message %></div>
+  <% else %>
+    <div class="alert alert-danger" role="alert"><%= message %></div>
   <% end %>
 <% end %>
 

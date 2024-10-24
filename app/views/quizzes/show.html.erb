@@ -5,11 +5,12 @@
     <%= link_to "Back to quizzes", quizzes_path, class: "btn btn-secondary" %>
   </div>
 
+    <p class="mb-3"><small class="text-muted">Player:</small> <strong><%= current_user.name %></strong></p>
+
   <div class="card mb-4">
-    <div class="card-body">
+    <div class="card-body text-center">
       <h2 class="card-title"><%= @presenter.quiz.title %></h2>
       <p class="card-text"><%= @presenter.quiz.description %></p>
-      <p class="card-text"><strong>Player:</strong> <%= current_user.name %></p>
     </div>
   </div>
 
