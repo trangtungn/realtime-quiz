@@ -4,7 +4,7 @@ class Quiz < ApplicationRecord
   before_validation :generate_token, on: :create
   before_create :set_expiration
 
-  def token_expired?
+  def expired?
     expired_at < Time.current
   end
 

@@ -4,16 +4,14 @@ class QuizzesController < ApplicationController
   before_action :validate_quiz, only: :join
 
   def index
-    @quizzes = Quiz.all
+    @quizzes = Quiz.all.order(created_at: :asc)
   end
 
   def show
-    @participations = @quiz.participations
-    @joined = @quiz.participations.exists?(user: current_user)
+    @presenter = QuizPresenter.new(@quiz, current_user)
   end
 
   def join
-    @quiz = Quiz.find_by!(unique_id: params[:unique_id])
     @participation = @quiz.participations.create(user: current_user)
     @participation_count = @quiz.participations.size
 
@@ -32,10 +30,12 @@ class QuizzesController < ApplicationController
   end
 
   def validate_quiz
-    return unless @quiz.token_expired?
+    return unless @quiz.expired?
 
-    flash[:alert] = "This quiz has ended."
-    redirect_to quizzes_path
+    respond_to do |format|
+      format.html { redirect_to quizzes_path, alert: "This quiz has ended." }
+      format.turbo_stream { head :unprocessable_entity }
+    end
   end
 
   def quiz_params
