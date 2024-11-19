@@ -1,7 +1,8 @@
 class JoinQuizService
-  def initialize(quiz, user)
+  def initialize(quiz, user, broadcast_channel = QuizChannel)
     @quiz = quiz
     @user = user
+    @broadcast_channel = broadcast_channel
   end
 
   def call
@@ -19,7 +20,7 @@ class JoinQuizService
   private
 
   def broadcast_message(participation)
-    QuizChannel.broadcast_to(@quiz, {
+    @broadcast_channel.broadcast_to(@quiz, {
       action: 'add_participant',
       participant: @user.name,
       participation: participation,
