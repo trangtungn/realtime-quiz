@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/trangtungn/blorgh-engine
+  revision: 9ae731091ee0c3511d2c56855714513c8f3ef732
+  ref: 9ae7310
+  specs:
+    blorgh (0.1.0)
+      rails (>= 7.1.4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -276,6 +284,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  blorgh!
   bootsnap
   capybara
   cssbundling-rails
