@@ -48,6 +48,7 @@ gem 'cssbundling-rails'
 
 gem 'blorgh', git: 'https://github.com/trangtungn/blorgh-engine', ref: '9ae7310'
 
+gem 'devise'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
