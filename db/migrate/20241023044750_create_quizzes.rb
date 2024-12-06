@@ -4,7 +4,10 @@ class CreateQuizzes < ActiveRecord::Migration[7.1]
       t.string :title
       t.string :description
       t.string :token
+      t.datetime :start_at, null: false, default: -> { "CURRENT_TIMESTAMP" }
       t.datetime :expired_at
+      t.references :creator, null: false, foreign_key: { to_table: :users }
+
 
       t.timestamps
     end
