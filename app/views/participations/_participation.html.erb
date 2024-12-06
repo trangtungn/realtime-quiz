@@ -1,3 +1,6 @@
 <li id="<%= dom_id(participation) %>">
-  <%= participation.user.name %>
+  <%= participation.user.name || participation.user.email %>
+  <% if participation.user.email == current_user.email %>
+    <span class="text-gray-500">(you)</span>
+  <% end %>
 </li>

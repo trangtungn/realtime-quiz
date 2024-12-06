@@ -1,17 +1,3 @@
-<div class="container mt-4">
-
-  <%= turbo_frame_tag "participations" do %>
-    <div id="quiz" data-quiz-id="<%= @presenter.quiz.id %>" class="card">
-      <div class="card-body">
-        <h3 class="card-title">Participants (<span id="participants_count"><%= @presenter.participations.count %></span>)</h3>
-        <div id="participations_list" class="list-group">
-          <%= render partial: "participations/participation", collection: @presenter.participations %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
   <%= render "shared/alerts" %>
 
@@ -22,7 +8,7 @@
 
   <p class="mb-4 text-sm">
     <span class="text-gray-500">Player:</span>
-    <strong class="text-gray-900"><%= current_user.name %></strong>
+    <strong class="text-gray-900"><%= current_user.name || current_user.email %></strong>
   </p>
 
   <div class="bg-white shadow rounded-lg mb-6">

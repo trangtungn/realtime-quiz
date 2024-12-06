@@ -39,8 +39,4 @@ class QuizzesController < ApplicationController
       format.turbo_stream { render :join, locals: { status: :error, message: "This quiz has ended." } }
     end
   end
-
-  def quiz_params
-    params.require(:quiz).permit(:title, :description)
-  end
 end
