@@ -1,23 +1,29 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <%= form_for(User.new, url: login_path) do |f| %>
-            <div class="mb-3">
-              <%= f.label :username, class: "form-label" %>
-              <div class="input-group">
-                <span class="input-group-text">@</span>
-                <%= f.text_field :username, class: "form-control", placeholder: "Enter your username" %>
+<div class="min-h-[80vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
+  <div class="w-full max-w-md">
+    <div class="bg-white shadow-md rounded-lg">
+      <div class="px-6 py-8">
+        <%= form_for(User.new, url: login_path) do |f| %>
+          <div class="mb-6">
+            <%= f.label :username, class: "block text-sm font-medium text-gray-700 mb-1" %>
+            <div class="relative rounded-md shadow-sm">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span class="text-gray-500 sm:text-sm">@</span>
               </div>
+              <%= f.text_field :username,
+                  class: "block w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm",
+                  placeholder: "Enter your username" %>
             </div>
+          </div>
 
-            <div class="d-grid">
-              <%= f.submit "Log in", class: "btn btn-primary btn-lg" %>
-            </div>
-          <% end %>
-        </div>
+          <div>
+            <%= f.submit "Log in",
+                class: "w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200" %>
+          </div>
+        <% end %>
       </div>
+    </div>
+
+    <div class="mt-4">
       <%= render partial: 'layouts/flash_errors' %>
     </div>
   </div>

@@ -45,6 +45,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'cssbundling-rails'
+gem 'tailwindcss-rails'
 
 gem 'blorgh', git: 'https://github.com/trangtungn/blorgh-engine', ref: '9ae7310'
 
