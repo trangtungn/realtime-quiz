@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :participations, dependent: :destroy
   has_many :quizzes, through: :participations
+
+  def admin?
+    is_a?(Admin)
+  end
 end
