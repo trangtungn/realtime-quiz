@@ -9,14 +9,17 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      cookies.signed[:user_id] = resource.id
+    end
+  end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    cookies.delete(:user_id)
+    super
+  end
 
   # protected
 
