@@ -6,5 +6,6 @@ class QuizChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
+    logger.info "Client unsubscribed from quiz channel"
   end
 end
