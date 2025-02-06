@@ -47,7 +47,7 @@ gem "bootsnap", require: false
 gem 'cssbundling-rails'
 gem 'tailwindcss-rails'
 
-gem 'blorgh', git: 'https://github.com/trangtungn/blorgh-engine', ref: '9ae7310'
+gem 'blorgh', git: 'https://github.com/trangtungn/blorgh-engine', ref: '73f665d'
 
 gem 'devise'
 
