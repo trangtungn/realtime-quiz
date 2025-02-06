@@ -71,3 +71,69 @@ Candidates are required to submit the following as part of the coding challenge:
    - The video must be between **5-10 minutes**. Any submission beyond 10 minutes will be rejected upfront.
    - Use any recording device (smartphone, webcam, etc.), ensuring good audio and video quality.
    - Ensure clear and concise communication.
+
+## Development
+
+### Engine: Hooking `blorgh` into the application
+
+`blorgh`, a mountable engine, is a gem that allows you to create a blog engine in your Rails application.
+
+#### Mouting The Engine
+
+- [Source Code](https://github.com/trangtungn/blorgh-engine)
+
+- Gemfile
+
+   ```ruby
+   # ref: Copy SHA from github repo, example: 9ae7310
+   gem 'blorgh', git: 'https://github.com/trangtungn/blorgh-engine', ref: '9ae7310'
+   ```
+
+- Run `bundle install` to install the gem.
+
+- Mount in the `config/routes.rb`
+
+   ```ruby
+   # config/routes.rb
+   mount Blorgh::Engine => '/blog'
+   ```
+
+- Accessible at `http://localhost:3000/blog`
+
+#### Engine Setup
+
+- To copy engine's migrations to the application's `db/migrate` directory
+
+```
+bin/rails blorgh:install:migrations
+```
+
+- To copy engine's migrations to a custom path, use `MIGRATIONS_PATH`
+
+```
+bin/rails railties:install:migrations MIGRATIONS_PATH=db_blourgh
+```
+
+- To copy engine's seeds to the application's `db/seeds.rb`
+
+```
+bin/rails blorgh:install:seeds
+```
+
+- To run migrations only for the engine
+
+```
+bin/rails db:migrate SCOPE=blorgh
+```
+
+- To run seeds only for the engine
+
+```
+bin/rails db:seed SCOPE=blorgh
+```
+
+- To revert migrations before removing the engine
+
+```
+bin/rails db:migrate SCOPE=blorgh VERSION=0
+```
