@@ -10,19 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_05_073159) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_06_085624) do
   create_table "blorgh_articles", force: :cascade do |t|
-    t.string "title"
-    t.text "text"
+    t.string "title", limit: 128, null: false
+    t.text "text", null: false
+    t.bigint "created_by", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "blorgh_comments", force: :cascade do |t|
-    t.integer "article_id"
-    t.text "text"
+    t.integer "blorgh_article_id", null: false
+    t.text "text", null: false
+    t.bigint "created_by", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["blorgh_article_id"], name: "index_blorgh_comments_on_blorgh_article_id"
   end
 
   create_table "participations", force: :cascade do |t|
@@ -65,6 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_05_073159) do
     t.index ["type"], name: "index_users_on_type"
   end
 
+  add_foreign_key "blorgh_comments", "blorgh_articles", on_delete: :cascade
   add_foreign_key "participations", "quizzes"
   add_foreign_key "participations", "users"
   add_foreign_key "quizzes", "users", column: "creator_id"
